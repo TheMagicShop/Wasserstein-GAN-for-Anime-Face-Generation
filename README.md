@@ -50,7 +50,7 @@ and finally this is the loss progress during training.
 
 # Architecture
 
-We begin our GAN with building the generator which starts with a 1-dimensional input layer of size `noise_dim`, then a Dense layer that projects the input into a higher dimensionality space, in such a way that its output is able to be reshaped into a small and deep tensor of feature maps of the form $(x,y,n)$ where $(x,y)$~$(4,4)$ and $n$ is $512$, and then a stack of blocks (BatchNormalization - ReLU - Conv2DTranspose), where each convolutional layer decrease the depth (feature maps) and upsample the size of the image, we employ as much of these stacks until we reach the original size, namely $(64, 64, 32)$, then two other blocks but this time with no upsampling as we already reached the orginal size, but only to reach the number of channels $(64, 64, 3)$, and finally we add a sigmoid activation layer to squash the tensor values inside $[0,1]$ to become a proper RGB image.
+We begin our GAN with building the generator which starts with a 1-dimensional input layer of size `noise_dim`, then a Dense layer that projects the input into a higher dimensionality space, in such a way that its output is able to be reshaped into a small and deep tensor of feature maps of the form $(x,y,n)$ where $(x,y)$ ~ $(4,4)$ and $n$ is $512$, and then a stack of blocks (BatchNormalization - ReLU - Conv2DTranspose), where each convolutional layer decrease the depth (feature maps) and upsample the size of the image, we employ as much of these stacks until we reach the original size, namely $(64, 64, 32)$, then two other blocks but this time with no upsampling as we already reached the orginal size, but only to reach the number of channels $(64, 64, 3)$, and finally we add a sigmoid activation layer to squash the tensor values inside $[0,1]$ to become a proper RGB image.
 
 [generator img]
 
@@ -99,6 +99,15 @@ Note:
 - if your images share the same size, and you know that size and want to keep it, use `--image_shape = your_height your_width`, and ignore the `--resize` parameter.
 
 - if you don't know the shape of your images, or you know but you want to resize them any why, please use `--resize = desired_height desired_width`, and ignore the `--image_shape` parameter.
+
+after the training has finished, the generator of the format (.h5) will be saved in your directory for later use.
+
+another way is to import the libraries:
+```
+from GANs import WassersteinGAN
+from utils import DataPreparator
+```
+reading the code will give you an idea on how to initialize these classes, this gives an access to more functionalities like the methods, `save_weights()` to save the weights for later training, and `load_weights(path)` to load a pretrained weights,
 <br/>
 <br/>
 
