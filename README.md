@@ -79,7 +79,7 @@ this is the pseudo-code, taken from the original paper [1].
 
 # How to use
 
-to use train this GAN on your own dataset:
+To use train this GAN on your own dataset:
 
 1 - clone the repository:
 ```
@@ -102,7 +102,7 @@ Note:
 
 after the training has finished, the generator of the format (.h5) will be saved in your directory for later use.
 
-another way is to import the libraries:
+Alternatievly, you can import the libraries:
 ```
 from GANs import WassersteinGAN
 from utils import DataPreparator
