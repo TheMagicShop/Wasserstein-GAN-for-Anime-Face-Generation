@@ -49,7 +49,9 @@ if __name__ == '__main__':
     my_help = 'overwriting the last saved weights, defualt: True'
     parser.add_argument('--save_best_only', type=bool, default=True, help=my_help)
     my_help = 'optional, to set an already pretrained weights, should be a path to an pkl file'
-    args = parser.parse_args('--load_weights', type=str, default=None, help=my_help)
+    parser.add_argument('--load_weights', type=str, default=None, help=my_help)
+    
+    args = parser.parse_args()
     
     if args.shape is None and args.resize is None:
         image_shape = (64, 64, 3)
