@@ -48,7 +48,7 @@ class DataPreparator():
     random.shuffle(self.files) # shuffle to assure randomness
   
   def _update_index(self):
-    '''update indexes, slide the window of the indexes by batch_size''''
+    '''update indexes, slide the window of the indexes by batch_size'''
     self.start_index += self.batch_size
     self.end_index += self.batch_size
     if self.end_index > len(self.files):
