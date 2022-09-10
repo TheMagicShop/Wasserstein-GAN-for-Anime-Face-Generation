@@ -85,7 +85,7 @@ To use train this GAN on your own dataset:
 ```
 !git clone https://github.com/TheMagicShop/Wasserstein-GAN-for-Anime-Face-Generation.git
 
-!cd Wasserstein-GAN-for-Anime-Face-Generation.git
+!cd Wasserstein-GAN-for-Anime-Face-Generation
 ```
 
 2 - use this script to get help about parameters to use:
