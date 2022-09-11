@@ -68,7 +68,7 @@ class WassersteinGAN():
     # plus two others with strides=1 (no upsampling)
     n_conv_layers = self.n_upsamples + 2  # last two conv layers have strides=1
     self.layer_filters = [image_shape[-1]] + \
-      [min(32*2**i, 256) for i in range(n_conv_layers - 1)] 
+      [min(32*2**i, 512) for i in range(n_conv_layers - 1)] 
     self.layer_filters = self.layer_filters[::-1]   # [512, ..., 64, 32, 3]
     # of course the discriminator use the reverse (downsampling)
     self.kernel_size = 5 # kernel size of 5
