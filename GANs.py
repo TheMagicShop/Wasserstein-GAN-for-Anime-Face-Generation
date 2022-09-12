@@ -15,6 +15,7 @@ import os
 import pathlib
 from utils import save_figure
 
+%matplotlib inline
 
 '''
 Wasserstein GAN is simply the Vanilla GAN except that the loss function is
