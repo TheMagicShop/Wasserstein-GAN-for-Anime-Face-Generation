@@ -255,7 +255,7 @@ class WassersteinGAN():
     build the adversarial which is simply the discriminator built on top of the generator,
     while the weights of the discriminator are forzen, the adversarial takes noise as input,
     flow it through the generator to generate fake images, along with the labels of +1,
-    (labeled as real) the generator will get penalized beacuse the discriminator will
+    (labelled as real) the generator will get penalized beacuse the discriminator will
     classify them (images) as fake and give a high loss which is used to tune the generator parameters
     so it'll do a better job in the next step.
     arg: noise_dim.
@@ -298,7 +298,7 @@ class WassersteinGAN():
 
   def _train_batch_discriminator(self, clip_value):
     '''
-    train the discriminator for one batch, given real and fake images labeled +1 and -1
+    train the discriminator for one batch, given real and fake images labelled +1 and -1
     respectively, the discriminator will train to classify the realness of the images.
     arg: clip value 
     '''
@@ -324,7 +324,7 @@ class WassersteinGAN():
     '''
     while the weights of the discriminator are forzen, the adversarial takes noise as input,
     flow it through the generator to generate fake images, along with the labels of +1,
-    (labeled as real) the generator will get penalazied beacuse the discriminator will
+    (labelled as real) the generator will get penalized beacuse the discriminator will
     classify them (images) as fake and give a high loss which is used to tune the generator parameters
     so it'll do a better job in the next step.
     '''
@@ -395,7 +395,7 @@ class WassersteinGAN():
                   to_path=None):
     '''
     this function is to be used at any point of training (or after)
-    to synthesize fake images from the earlier created noise.
+    to synthesize fake images from noise.
     args:
       noise: of size (n_points, noise_dim), the input of the generator.
       n_rows: number of rows in the subplots.
@@ -403,6 +403,7 @@ class WassersteinGAN():
       show: to show the subplots in the output or not.
       to_path: path to save the figure to.
     '''
+    # if noise is not provided use the one created earlier in initialization.
     if noise is None:
       noise = self.tracked_noise
     if len(noise) < n_rows*n_cols:
