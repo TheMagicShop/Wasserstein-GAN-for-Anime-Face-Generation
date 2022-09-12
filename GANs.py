@@ -161,7 +161,7 @@ class WassersteinGAN():
     '''
     construct the generator, starting with a Dense layer to transform input tensors
     of dimension noise_dim into tensors of a sufficent dimensionality to reshape them 
-    into small feature map, then use a certain number of Conv2DTranspose
+    into small feature maps, then use a certain number of Conv2DTranspose
     (preceded by BatchNormalizaion and ReLU activation) to upsample
     the feature maps to attain the image_shape.
     args:
@@ -208,7 +208,7 @@ class WassersteinGAN():
     generator has done, namely Conv2D (preceded with LeakyReLU) with self.layer_filters
     flipped this time, the filter size increases while downsampling (strides=2),
     except last layer where strides=1, all this is followed by a Flatten then a Dense
-    layer to classify image as real (+1) or fake (-1), with a linear activation to comform 
+    layer to classify image as real (+1) or fake (-1), with a linear activation to conform 
     with the wasserstein loss.
     arg: image_shape.
     '''
@@ -255,7 +255,7 @@ class WassersteinGAN():
     build the adversarial which is simply the discriminator built on top of the generator,
     while the weights of the discriminator are forzen, the adversarial takes noise as input,
     flow it through the generator to generate fake images, along with the labels of +1,
-    (labeled as real) the generator will get penalazied beacuse the discriminator will
+    (labeled as real) the generator will get penalized beacuse the discriminator will
     classify them (images) as fake and give a high loss which is used to tune the generator parameters
     so it'll do a better job in the next step.
     arg: noise_dim.
