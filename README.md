@@ -20,32 +20,32 @@ after having trained the GAN with `image_shape=(64, 64, 3)`, `noise_dim=128`, `l
 
 after n_steps:
 
-![alt text](https://github.com/TheMagicShop/Wasserstein-GAN-for-Anime-Face-Generation/blob/main/coming_soon.jpg)
+![alt text](https://github.com/TheMagicShop/Wasserstein-GAN-for-Anime-Face-Generation/blob/main/ComingSoon.jpg)
 
 
 after m_steps:
 
-![alt text](https://github.com/TheMagicShop/Wasserstein-GAN-for-Anime-Face-Generation/blob/main/coming_soon.jpg)
+![alt text](https://github.com/TheMagicShop/Wasserstein-GAN-for-Anime-Face-Generation/blob/main/ComingSoon.jpg)
 
 
 we took the first and last components of a noise vector and make them vary along $[-1, +1]$ and this is the resulting grid of images:
 
-![alt text](https://github.com/TheMagicShop/Wasserstein-GAN-for-Anime-Face-Generation/blob/main/coming_soon.jpg)
+![alt text](https://github.com/TheMagicShop/Wasserstein-GAN-for-Anime-Face-Generation/blob/main/ComingSoon.jpg)
 
 
 we took two random noise vectors and average them up using different weights $\alpha$, `new_vector = alpha*v1 + (1-alpha)*v2`, these are the two images generated from the former noise vectors accompanied with the grid of the new images with $\alpha$ varying from $0$ to $1$:
 
-![alt text](https://github.com/TheMagicShop/Wasserstein-GAN-for-Anime-Face-Generation/blob/main/coming_soon.jpg)
+![alt text](https://github.com/TheMagicShop/Wasserstein-GAN-for-Anime-Face-Generation/blob/main/ComingSoon.jpg)
 <br/>
-![alt text](https://github.com/TheMagicShop/Wasserstein-GAN-for-Anime-Face-Generation/blob/main/coming_soon.jpg)
+![alt text](https://github.com/TheMagicShop/Wasserstein-GAN-for-Anime-Face-Generation/blob/main/ComingSoon.jpg)
 
 this is a gif of a random image synthesized using a random vector being updated after each training step.
 
-![alt text](https://github.com/TheMagicShop/Wasserstein-GAN-for-Anime-Face-Generation/blob/main/coming_soon.jpg)
+![alt text](https://github.com/TheMagicShop/Wasserstein-GAN-for-Anime-Face-Generation/blob/main/ComingSoon.jpg)
 
 and finally this is the loss progress during training.
 
-![alt text](https://github.com/TheMagicShop/Wasserstein-GAN-for-Anime-Face-Generation/blob/main/coming_soon.jpg)
+![alt text](https://github.com/TheMagicShop/Wasserstein-GAN-for-Anime-Face-Generation/blob/main/ComingSoon.jpg)
 <br/>
 <br/>
 
@@ -53,15 +53,15 @@ and finally this is the loss progress during training.
 
 We begin our GAN with building the generator which starts with a 1-dimensional input layer of size `noise_dim`, then a Dense layer that projects the input into a higher dimensionality space, in such a way that its output is able to be reshaped into a small and deep tensor of feature maps of the form $(x,y,n)$ where $(x,y)$ ~ $(4,4)$ and $n$ is $512$, and then a stack of blocks (BatchNormalization - ReLU - Conv2DTranspose), where each convolutional layer decrease the depth (feature maps) and upsample the size of the image, we employ as much of these stacks until we reach the original size, namely $(64, 64, 32)$, then two other blocks but this time with no upsampling as we've already reached the orginal size, but only to reach the number of channels $(64, 64, 3)$, and finally we add a sigmoid activation layer to squash the tensor values inside $[0,1]$ to become a proper RGB image.
 
-![alt text](https://github.com/TheMagicShop/Wasserstein-GAN-for-Anime-Face-Generation/blob/main/coming_soon.jpg)
+![alt text](https://github.com/TheMagicShop/Wasserstein-GAN-for-Anime-Face-Generation/blob/main/figures/generator_architecture.jpg)
 
 On the other hand there is the discriminator which mainly is the reverse operation of the generation, it downsamples the image until we reach the shape $(x,y,n)$ mentioned earlier, and we follow it by a Flatten layer and a Dense layer (with linear activation) of one single neuron to discriminate the realness of the feed image, but this time the blocks consist of (LeakyReLU - Conv2D), the output of the Dense layer are either positive -so real image- or negative -so fake image-.
 
-![alt text](https://github.com/TheMagicShop/Wasserstein-GAN-for-Anime-Face-Generation/blob/main/coming_soon.jpg)
+![alt text](https://github.com/TheMagicShop/Wasserstein-GAN-for-Anime-Face-Generation/blob/main/figures/discriminator_architecture.jpg)
 
 The adversarial on its turn is merely the discriminator built on top of the generator, but with the weights of the former frozen.
 
-![alt text](https://github.com/TheMagicShop/Wasserstein-GAN-for-Anime-Face-Generation/blob/main/coming_soon.jpg)
+![alt text](https://github.com/TheMagicShop/Wasserstein-GAN-for-Anime-Face-Generation/blob/main/figures/adversarial_architecture.jpg)
 <br/>
 <br/>
 
@@ -74,7 +74,7 @@ On the contrary, the adverarial which takes noise 1D-vectors and transform them 
 the loss is of course the Wasserstein loss and the optimizer is RMSprop.
 this is the pseudo-code, taken from the original paper [1].
 
-![alt text](https://github.com/TheMagicShop/Wasserstein-GAN-for-Anime-Face-Generation/blob/main/coming_soon.jpg)
+![alt text](https://github.com/TheMagicShop/Wasserstein-GAN-for-Anime-Face-Generation/blob/main/PseudoCode.jpg)
 <br/>
 <br/>
 
